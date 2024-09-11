@@ -1,0 +1,35 @@
+.Card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom:2px;
+    gap: 4px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 6px #939292;
+
+    img {
+        display: block;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        width: 100%;
+    }
+
+    button {
+        width: 50%;
+        padding: 0;
+    }
+    .delBtn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        padding: 2px;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: #ed7575;
+        text-align: center;
+    }
+}
