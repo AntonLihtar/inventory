@@ -7,6 +7,16 @@ import TableRow from './TableRow';
 
 const storage = getStorage(); // Инициализация Firebase Storage
 
+const Block = ({items}) => {
+    return (
+        <div className="block">
+            {items.map((item) => (
+                <TableRow key={item.id} item={item}/>
+            ))}
+        </div>
+    )
+}
+
 const TableComponent = () => {
     const [items, setItems] = useState([]);
     const [newItem, setNewItem] = useState({
@@ -75,17 +85,32 @@ const TableComponent = () => {
         if (a.state === 'садик' && b.state !== 'садик') return -1;
         if (a.state !== 'садик' && b.state === 'садик') return 1;
 
-        // Сортировка по дате
-        return new Date(b.date) - new Date(a.date); // Убывающая сортировка по дате (новые сначала)
+        return a.name.localeCompare(b.name); // Сортировка по названию (по алфавиту)
     });
+
+    const sadItems = sortedItems.filter(el => el.state === 'садик')
+    const homeItems = sortedItems.filter(el => el.state === 'дома')
+
+    const popularItems = homeItems.filter(({name}) => {
+        return name.includes('футболка')
+            || name.includes('штаны')
+            || name.includes('леггинсы')
+    })
+
+    const otherItems = homeItems.filter(({name}) => {
+        return !name.includes('футболка')
+            && !name.includes('штаны')
+            && !name.includes('леггинсы')
+    })
 
     return (
         <div className="Container">
-            <main>
-                {sortedItems.map((item) => (
-                    <TableRow key={item.id} item={item} />
-                ))}
-            </main>
+            <h2>В садике</h2>
+            <Block items={sadItems}/>
+            <h2>Дома</h2>
+            <Block items={popularItems}/>
+            <Block items={otherItems}/>
+
 
             {/* Форма для добавления новой строки */}
             <h3>Добавить вещь</h3>
