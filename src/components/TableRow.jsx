@@ -39,8 +39,11 @@ const TableRow = ({ item }) => {
                 onClick={toggleImageSize} // Переключение полноэкранного режима при клике
             />
 
-            <button onClick={toggleState}>
-                {item.state === 'дома' ? 'садик' : 'дома'}
+            <button
+                style={{ backgroundColor: item.state === 'дома' ? 'white' : '#704cf3' }}
+                onClick={toggleState}
+            >
+                {item.state}
             </button>
 
             <h5>{item.date}</h5>
